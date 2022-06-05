@@ -20,13 +20,16 @@ public class FoodOrderController {
     private final FoodOrderService foodOrderService;
 
     @PostMapping("/order/request")
+    // 주문 요청
     public OrderDto createOrders (@RequestBody OrderRequestDto orderRequestDto) {
+        System.out.println("주문 요청 확인");
         return foodOrderService.createOrders(orderRequestDto);
     }
 
     @GetMapping("/orders")
+    // 주문 조회
     public List<OrderDto> findAllOrder() {
-
+        System.out.println("주문 조회 확인");
         return foodOrderService.findAllOrder();
     }
 }

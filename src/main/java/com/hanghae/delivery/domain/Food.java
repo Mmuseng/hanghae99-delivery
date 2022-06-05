@@ -26,6 +26,7 @@ public class Food {
     private int price;
 
     @Column(nullable = false)
+    // 음식점 id
     private Long restaurantId;
 
     public Food (Long id, FoodDto requestDto){

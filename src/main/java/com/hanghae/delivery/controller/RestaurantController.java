@@ -16,13 +16,16 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @PostMapping("/restaurant/register")
+    // 음식점 등록
     public Restaurant createRestaurants(@RequestBody RestaurantDto requestDto) {
+        System.out.println("음식점 등록 확인");
         return restaurantService.createRestaurants(requestDto);
     }
 
     @GetMapping("/restaurants")
+    // 음식점 조회
     public List<Restaurant> getRestaurant() {
-
+        System.out.println("음식점 조회");
         return restaurantRepository.findAll();
     }
 }

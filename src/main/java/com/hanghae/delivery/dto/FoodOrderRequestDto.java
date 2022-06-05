@@ -11,4 +11,5 @@ public class FoodOrderRequestDto {
 
     private Long id;
     private int quantity;
+
 }

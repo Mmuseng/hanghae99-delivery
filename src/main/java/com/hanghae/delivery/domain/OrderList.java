@@ -17,17 +17,19 @@ public class OrderList {
     private Long id;
 
     @Column(nullable = false)
+    // 주문 수량
     private int quantity;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
+    // 가격
     private int price;
 
-    @ManyToOne
+    @ManyToOne // Food 테이블과 매핑
     private Food food;
 
-    @ManyToOne
+    @ManyToOne // FoodOrder 테이블과 매핑
     private FoodOrder foodOrder;
 }

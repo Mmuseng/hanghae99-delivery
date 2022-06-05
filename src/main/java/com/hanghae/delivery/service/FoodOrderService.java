@@ -29,7 +29,7 @@ public class FoodOrderService {
     private final OrderListRepository orderListRepository;
     private final FoodOrderRepository foodOrderRepository;
 
-    @Transactional
+    @Transactional // 해당 범위 내 메서드가 트랜잭션이 되도록 보장
     public OrderDto createOrders(OrderRequestDto orderRequestDto) {
         Restaurant restaurant = getRestaurant(orderRequestDto);
 
@@ -40,6 +40,7 @@ public class FoodOrderService {
 
         for (OrderList tempOrderList : orderItems) {
             int quantity = tempOrderList.getQuantity();
+            // 주문 수량이 1보다 작거나 100보다 클 때 에러 발생
             if(quantity < 1 || quantity > 100) {
                 try {
                     throw new IllegalAccessException(EXCEPTION_QUANTITY_ERROR);
@@ -59,10 +60,12 @@ public class FoodOrderService {
             orderListRepository.save(orderList);
             FoodOrderDto foodOrderDto = new FoodOrderDto(orderList);
             foodOrderDtoList.add(foodOrderDto);
+            // 총 가격 = 음식 가격 * 수량
             totalPrice += food.getPrice() * quantity;
             orderItemList.add(orderList);
         }
 
+        // 총 가격이 최소 주문 금액보다 낮을 때 에러 발생
         if (totalPrice < restaurant.getMinOrderPrice()) {
             try {
                 throw new IllegalAccessException(EXCEPTION_TOTAL_MIN_PRICE_ERROR);
@@ -73,6 +76,7 @@ public class FoodOrderService {
 
         int deliveryFee = restaurant.getDeliveryFee();
 
+        // 총 가격 + 배달비
         totalPrice += deliveryFee;
         FoodOrder foodOrder = FoodOrder.builder()
                 .restaurantName(restaurant.getName())

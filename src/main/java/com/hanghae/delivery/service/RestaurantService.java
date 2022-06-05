@@ -25,9 +25,11 @@ public class RestaurantService {
         else if(minCheck%100 != 0) {
             throw new IllegalArgumentException(EXCEPTION_MIN_UNIT_ERROR);
         }
+        // 배달비가 0원 이하 이거나 10,000원 이상 일때 에러 발생
         else if(feeCheck < 0 || feeCheck > 10000){
             throw new IllegalArgumentException(EXCEPTION_FEE_PRICE_ERROR);
         }
+        // 배달비를 500으로 나누었을 때 값이 0이 아니면 에러 발생 (500원 단위로만 입력 가능)
         else if(feeCheck%500 !=0) {
             throw new IllegalArgumentException(EXCEPTION_FEE_UNIT_ERROR);
         }
