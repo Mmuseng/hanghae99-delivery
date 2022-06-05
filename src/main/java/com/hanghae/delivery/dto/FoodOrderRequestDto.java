@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FoodDto {
-    private String name;
-    private int price;
+public class FoodOrderRequestDto {
+
+    private Long id;
+    private int quantity;
 }

@@ -1,7 +1,6 @@
 package com.hanghae.delivery.domain;
 
 import com.hanghae.delivery.dto.FoodDto;
-import com.hanghae.delivery.validator.FoodValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,15 +25,13 @@ public class Food {
     // 가격
     private int price;
 
-    @ManyToOne
-    //음식점 테이블과 조인
-    @JoinColumn(name = "RESTAURANT_ID")
-    private Restaurant restaurant;
+    @Column(nullable = false)
+    private Long restaurantId;
 
-    public Food (FoodDto foodDto, Restaurant restaurant) {
-        FoodValidator.foodValidator(foodDto, restaurant);
-        this.name = foodDto.getName();
-        this.price = foodDto.getPrice();
+    public Food (Long id, FoodDto requestDto){
+        this.name = requestDto.getName();
+        this.price = requestDto.getPrice();
+        this.restaurantId = id;
     }
 
 }
